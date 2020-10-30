@@ -1,5 +1,14 @@
-# MOVIE Web Application
+# Movie Web Application
 
+# Feature #
+
+```shell
+Browse movie by Actor's name.
+Browse movie by Genre.
+Browse movie by Director. 
+View list of movies 1 by 1. 
+Make comments on movie. (must login)
+```
 ## Description
 
 A Web application that demonstrates use of Python's Flask framework. The application makes use of libraries such as the Jinja templating library and WTForms. Architectural design patterns and principles including Repository, Dependency Inversion and Single Responsibility have been used to design the application. The application uses Flask Blueprints to maintain a separation of concerns between application functions. Testing includes unit and end-to-end testing using the pytest tool. 
