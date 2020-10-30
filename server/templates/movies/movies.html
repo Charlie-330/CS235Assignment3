@@ -1,0 +1,105 @@
+{% extends 'layout_new.html' %} {% block content %}
+
+    <div style="background-image: url('../../static/assets/images/register.jpg');
+                background-blend-mode: multiply; background-color: rgba(0,0,0,0.7);
+                height: 250px; " 
+         data-aos="fade" data-stellar-background-ratio="0.5" data-aos="fade">
+    </div>
+    <br><br><br>
+    
+      <div class="container align-items-center justify-content-center">
+        <form action="{{url_for('movies_bp.movies')}}" method="GET">
+        <div class="row align-items-center justify-content-around">
+          
+          <span class="col-3">
+            <label >Actor Name: {{actor_name}}</label>
+            <input type="text" class="form-control border-secondary text-white bg-transparent"
+                   name="actor_name"  placeholder="Enter an actor's name" >
+          </span>
+          <span class="col-3">
+            <label >Genre: {{genre_name}}</label>
+            <input type="text" class="form-control border-secondary text-white bg-transparent"
+                   name="genre_name" placeholder="Enter genre" >
+          </span>
+          <span class="col-3">
+            <label >Director: {{director_name}}</label>
+            <input type="text" class="form-control border-secondary text-white bg-transparent"
+                    name="director_name"  placeholder="Enter director's name" >
+          </span>
+          <span class="col-1">
+            <label ></label>
+            <input  class="btn btn-primary py-2 px-6"   type="submit" value="Search">
+          </span>
+         
+        </div>
+         </form>
+      </div>
+    
+    
+    <div class="site-section">
+      <div class="container">
+        <p class="text-white">Total: {{count}}</p>
+        {% for movie in movies %}
+        <div class="d-block d-md-flex podcast-entry bg-white mb-5" data-aos="fade-up">
+          <div class="image">
+            <img src="{{movie.poster}}" />
+          </div>
+          <div class="text">
+
+            <h3 class="font-weight-light"><a href="#">{{movie.title}}</a></h3>
+            <div class=" mb-3 text-black">
+              <span class="text-black-opacity-05">
+              <small>Direct By {{movie.director}} 
+                <span class="sep">/</span> {{movie.year}} 
+                <span class="sep">/</span>{{movie.genre}}
+                <span class="sep">/</span> ☆{{movie.rating}}
+              </small>
+              </span>
+            </div>
+            <div class=" mb-3 text-black">
+              <span class="text-black-opacity-05">
+              <small>Leading Actors
+                <span class="sep">|</span> {{movie.actors}}
+              </small>
+              </span>
+            </div>
+            <p class="mb-4 text-black">
+              {{movie.description}}
+            </p>
+
+           <a href="{{url_for('movies_bp.detail', rank=movie.rank)}}" 
+              class="text-white btn btn-primary py-2 px-6">More Details</a>
+
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <div class="site-block-27">
+              <ul>
+                <li><a href="{{url_for('movies_bp.movies', page='1', 
+                              actor_name=actor_name, genre_name=genre_name,director_name=director_name)}}" style="color:#745530"> &lt;< </a></li>
+                <li><a href="{{url_for('movies_bp.movies', page=page-1)}}">&lt;</a></li>
+                {% for p in range(current_start, page) %}
+                <li><a href="{{url_for('movies_bp.movies', page=p,
+                              actor_name=actor_name, genre_name=genre_name,director_name=director_name)}}">{{p}}</a></li>
+                {% endfor %}
+                <li class="active"><span>{{page}}</span></li>
+                {% for p in range(page+1, end+1) %}
+                <li><a href="{{url_for('movies_bp.movies', page=p,
+                              actor_name=actor_name, genre_name=genre_name,director_name=director_name)}}">{{p}}</a></li>
+                {% endfor %}
+                <li><a href="{{url_for('movies_bp.movies', page=page+1,
+                              actor_name=actor_name, genre_name=genre_name,director_name=director_name)}}">&gt;</a></li>
+                <li><a href="{{url_for('movies_bp.movies', page=total,
+                              actor_name=actor_name, genre_name=genre_name,director_name=director_name)}}" style="color:#745530">&gt;> </a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock %}
